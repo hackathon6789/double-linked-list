@@ -68,5 +68,4 @@ public:
             temp = temp->next;
         }
         cout << endl;
-    }
-
+    };
