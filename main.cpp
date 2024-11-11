@@ -60,3 +60,13 @@ public:
         if (temp == tail) tail = temp->prev;
         delete temp;
     }
+    // Display the list
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+
