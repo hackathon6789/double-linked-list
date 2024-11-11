@@ -14,51 +14,49 @@ private:
 
 public:
     DoublyLinkedList() : head(nullptr), tail(nullptr) {}
-    // Insert at the beginning
-    void insertAtBeginning(int data) {
-        Node* newNode = new Node(data);
-        if (!head) {
-            head = tail = newNode;
+}
+// Delete from the beginning
+    void deleteFromBeginning() {
+        if (!head) return;
+        Node* temp = head;
+        if (head == tail) {
+            head = tail = nullptr;
         } else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
+            head = head->next;
+            head->prev = nullptr;
         }
+        delete temp;
     }
 
-    // Insert at the end
-    void insertAtEnd(int data) {
-        Node* newNode = new Node(data);
-        if (!tail) {
-            head = tail = newNode;
+    // Delete from the end
+    void deleteFromEnd() {
+        if (!tail) return;
+        Node* temp = tail;
+        if (head == tail) {
+            head = tail = nullptr;
         } else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            tail = tail->prev;
+            tail->next = nullptr;
         }
+        delete temp;
     }
 
-    // Insert at a specific position
-    void insertAtPosition(int data, int pos) {
+    // Delete from a specific position
+    void deleteFromPosition(int pos) {
         if (pos <= 1) {
-            insertAtBeginning(data);
+            deleteFromBeginning();
             return;
         }
-        Node* newNode = new Node(data);
         Node* temp = head;
         int count = 1;
-        while (temp && count < pos - 1) {
+        while (temp && count < pos) {
             temp = temp->next;
             count++;
         }
-        if (!temp) {  // If position is out of bounds, insert at the end
-            insertAtEnd(data);
-        } else {
-            newNode->next = temp->next;
-            newNode->prev = temp;
-            if (temp->next) temp->next->prev = newNode;
-            temp->next = newNode;
-            if (!newNode->next) tail = newNode;
-        }
+        if (!temp) return;  // Position out of bounds
+        if (temp->next) temp->next->prev = temp->prev;
+        if (temp->prev) temp->prev->next = temp->next;
+        if (temp == head) head = temp->next;
+        if (temp == tail) tail = temp->prev;
+        delete temp;
     }
-}
