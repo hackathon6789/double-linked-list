@@ -1,0 +1,2 @@
+This code implements a doubly linked list, where each node contains data and links to both the next and previous nodes. It supports inserting nodes at the beginning, end, or any specific position, and also allows deleting nodes from these positions. The display function prints the list contents from head to tail.
+In the main function, a menu lets the user perform these actions interactively: they can choose to insert, delete, display, or exit the program. The menu repeats until the user selects the option to exit.
